@@ -10,8 +10,6 @@ services:
     volumes:
       - ./conf.yaml:/app/conf.yaml:ro
     restart: unless-stopped
-    networks:
-      - deer-flow-network
 
   frontend:
     build:
@@ -21,15 +19,9 @@ services:
         - NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
     container_name: deer-flow-frontend
     ports:
-      - "3000:3000"
+      - "7427:3000"
     env_file:
       - .env
     depends_on:
       - backend
     restart: unless-stopped
-    networks:
-      - deer-flow-network
-
-networks:
-  deer-flow-network:
-    driver: bridge
